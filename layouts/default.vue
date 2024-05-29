@@ -4,7 +4,6 @@
       <v-navigation-drawer
         expand-on-hover
         rail
-        theme="dark"
       >
         <v-list>
           <v-list-item
@@ -17,23 +16,21 @@
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-home" to="/" title="Home" value="starred"></v-list-item>
-          <v-list-item to="variaveis" prepend-icon="mdi-google" title="Variavei" value="myfiles"></v-list-item>
+          <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
           <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
           <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-main style="height: 100vh; background-color: black;" theme="dark">
 
+      <v-main style="height: 100vh">
         <slot/>
-
       </v-main>
     </v-layout>
   </v-card>
 </template>
 
 <script>
-export default {
-  name: 'default'
+export default{
+  
 }
 </script>

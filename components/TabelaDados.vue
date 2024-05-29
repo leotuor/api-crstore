@@ -95,7 +95,7 @@ export default {
 
   methods: {
     deleteItem(item) {
-      this.$emit('deleteItem', item)
+      this.$emit('persist', item)
     },
     editItem(item) {
       this.$emit('editItem', item)
