@@ -15,6 +15,7 @@
             icon="mdi-plus"
             color="green darken-2"
             @click="abrirDialog"
+            
           >
           </v-btn>
         </template>
@@ -23,7 +24,13 @@
   </v-row>
   <v-row>
     <v-col>
-      <v-data-table :loading="loading" :headers="headers" theme="dark" :items="items">
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        width=""
+        height="300"
+        item-value="name"
+      >
 
         <template v-slot:no-data>
           <span>
@@ -95,7 +102,7 @@ export default {
 
   methods: {
     deleteItem(item) {
-      this.$emit('persist', item)
+      this.$emit('deletarItem', item)
     },
     editItem(item) {
       this.$emit('editItem', item)
