@@ -107,10 +107,6 @@ export default {
       },
     },
 
-    mudaPagina() {
-      this.$router.push({ path: "/variaveis" });
-    },
-
     async getItems() {
       const response = await this.$api.get("/usuario");
       this.items = response.data;

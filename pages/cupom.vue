@@ -12,42 +12,35 @@
     <v-dialog v-model="ativo" max-width="500">
       <v-card height="600" width="700">
         <v-card-title>
-          <h1>{{ tituloDialog }} um Evento</h1>
+          <h1>{{ tituloDialog }} um Cupom</h1>
         </v-card-title>
         <v-card-text>
           <v-row>
             <v-col>
               <v-text-field
-                v-model="produto.name"
+                v-model="cupom.code"
                 variant="outlined"
-                label="Nome"
-                placeholder="Nome"
-              />
-              <v-text-field
-                v-model="produto.price"
-                variant="outlined"
-                label="Preço"
-                placeholder="Preço"
-              />
-              <v-text-field
-                v-model="produto.description"
-                variant="outlined"
-                label="Description"
-                placeholder="Description"
+                label="Código"
+                placeholder="Código"
               />
               <v-autocomplete
-                v-model="produto.idCategory"
-                :items="categorias"
-                item-title="name"
-                item-value="id"
+                v-model="cupom.type"
+                label="Tipo"
+                placeholder="Tipo"
               />
               <v-text-field
-                v-model="produto.image"
+                v-model="cupom.value"
                 variant="outlined"
-                label="Miniatura"
-                placeholder="Miniatura"
+                label="Valor"
+                placeholder="Valor"
               />
               
+              <v-text-field
+                v-model="cupom.uses"
+                variant="outlined"
+                label="Usos"
+                placeholder="Usos"
+              />
             </v-col>
           </v-row>
         </v-card-text>
@@ -70,34 +63,29 @@ export default {
       loading: true,
       dialog: false,
       textoproduto: null,
-      categorias: [],
-      produto: {
-        id: null,
-        name: null,
-        price: null,
-        image: null,
-        description: null,
-        idCategory: null,
+      cupom: {
+        code: null,
+        type: null,
+        value: null,
+        uses: null,
       },
       items: [],
       headers: [
         {
-          title: "Identificador",
-          key: "id",
-          align: "start",
+          title: "Código",
+          key: "code",
         },
         {
-          title: "nome",
-          key: "name",
+          title: "Tipo",
+          key: "type",
         },
         {
-          title: "Descrição",
-          key: "description",
+          title: "Valor",
+          key: "value",
         },
         {
-          title: "actions",
-          key: "actions",
-          sortable: false,
+          title: "Usos",
+          key: "uses",
         },
       ],
     };
@@ -105,24 +93,20 @@ export default {
 
   computed: {
     tituloDialog: function () {
-      return this.produto.id ? "Editar" : "Criar";
+      return this.cupom.id ? "Editar" : "Criar";
     },
   },
 
   async created() {
     await this.getItems();
-    await this.getCategory();
   },
 
   methods: {
-    resetProduto() {
-      this.produto = {
-        id: null,
-        name: null,
-        price: null,
-        image: null,
-        description: null,
-        idCategory: null,
+    resetCupom() {
+      this.cupom = {
+        code: null,
+        type: null,
+        uses: null,
       };
       this.ativo = false;
     },
@@ -130,7 +114,7 @@ export default {
     async deletarItem(items) {
       try {
         if (confirm(`Deseja deletar o items com id: ${items.id}.`)) {
-          const response = await this.$api.post("/produto/destroy", {
+          const response = await this.$api.post("/cupom/destroy", {
             id: items.id,
           });
           alert("Item Deletado!");
@@ -145,23 +129,23 @@ export default {
     },
 
     async persist() {
-      if (this.produto.id) {
+      if (this.cupom.id) {
         const response = await this.$api.post(
-          `/produto/persist/${this.produto.id}`,
-          this.produto
+          `/cupom/persist/${this.cupom.id}`,
+          this.cupom
         );
       } else {
         const response = await this.$api.post(
-          "/produto/persist",
-          this.produto
+          "/cupom/persist",
+          this.cupom
         );
       }
-      this.resetProduto();
+      this.resetCupom();
       await this.getItems();
     },
 
     editItem(items) {
-      this.produto = {
+      this.cupom = {
         ...items,
       };
       this.ativo = true;
@@ -170,24 +154,16 @@ export default {
     watch: {
       ativo(valor) {
         if (valor == false) {
-          this.resetProduto();
+          this.resetCupom();
         }
       },
     },
 
-    mudaPagina() {
-      this.$router.push({ path: "/variaveis" });
-    },
-
     async getItems() {
-      const response = await this.$api.get("/produto");
+      const response = await this.$api.get("/cupom");
       this.items = response.data;
-      console.log(response.data);
     },
-    async getCategory() {
-      const response = await this.$api.get("/categoria");
-      this.categorias = response.data;
-    },
+    
 
   },
 };

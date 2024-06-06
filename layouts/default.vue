@@ -24,9 +24,10 @@
       <v-divider></v-divider>
 
       <v-list density="compact" nav>
-        <v-list-item to="/" prepend-icon="mdi-home" title="Home" value="myfiles"></v-list-item>
-        <v-list-item to="/produtos" prepend-icon="mdi-file-edit" title="Cadastrar Produtos" value="shared"></v-list-item>
-        <v-list-item to="/lista" prepend-icon="mdi-format-list-bulleted" title="Lista" value="starred"></v-list-item>
+        <v-list-item to="/" prepend-icon="mdi-home" title="Home" value="homepage"></v-list-item>
+        <v-list-item to="/loja" prepend-icon="mdi-cart" title="Loja" value="lojinha"></v-list-item>
+        <v-list-item to="/produtos" prepend-icon="mdi-file-edit" title="Cadastrar Produtos" value="produtos"></v-list-item>
+        <v-list-item to="/cupom" prepend-icon="mdi-format-list-bulleted" title="Criar cupons" value="cupons"></v-list-item>
       </v-list>
     </v-navigation-drawer>
       <v-main style="height: 100dvh">

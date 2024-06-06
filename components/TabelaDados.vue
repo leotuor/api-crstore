@@ -87,7 +87,7 @@ export default {
   name:'TabelaDadosComponent',
   props: {
     items: {
-      type: Array
+      type: Array,
     },
     headers: {
       type: Array,
