@@ -6,6 +6,7 @@
         prominent
       >
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-btn style="margin-left: 91%;"><v-icon>mdi-cart</v-icon></v-btn>
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
@@ -42,6 +43,7 @@ export default{
   data: () => ({
     drawer: false,
   })
+  
   
 }
 </script>

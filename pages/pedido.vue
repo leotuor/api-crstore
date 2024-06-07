@@ -4,6 +4,7 @@
     <TabelaDados
       titulo="Tabela pedidos"
       :headers="headers"
+      :items="items"
       @edit-item="editItem"
       @deletar-item="deletarItem"
       @abrir-dialog="() => ativo = true"
@@ -87,7 +88,6 @@ export default {
       dialog: false,
       textoPedido: null,
       usuarios: [],
-      entregas: [],
       enderecos: [],
       pagamentos: [],
       cupons: [],
@@ -96,10 +96,10 @@ export default {
         total: null,
         totalDiscount: null,
         idUserCustumer: null,
+        idUserDelivery: null,
         idAddress: null,
         idPayment: null,
         idCupom: null,
-        completeAddress: null
       },
       items: [],
       headers: [
@@ -143,24 +143,27 @@ export default {
     },
 
   async created() {
-    await this.getItems();
-    await this.getUser();
-    await this.getAddresses();
-    await this.getPayment();
-    await this.getCupom();
+    await Promise.all([
+      await this.getItems(),
+      await this.getUser(),
+      await this.getAddresses(),
+      await this.getPayment(),
+      await this.getCupom(),
+    ])
   },
 
   methods: {
     resetPedido() {
       this.pedido = {
         status: null,
-      total: null,
-      totalDiscount: null,
-      idUserCustumer: null,
-      idUserDelivery: null,
-      idAddress: null,
-      idPayment: null,
-      idCupom: null,
+        total: null,
+        totalDiscount: null,
+        idUserCustumer: null,
+        idUserDelivery: null,
+        idAddress: null,
+        idPayment: null,
+        idCupom: null,
+        address: []
       };
       this.ativo = false;
     },

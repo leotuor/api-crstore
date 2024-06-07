@@ -15,7 +15,6 @@
             icon="mdi-plus"
             color="green darken-2"
             @click="abrirDialog"
-            
           >
           </v-btn>
         </template>
